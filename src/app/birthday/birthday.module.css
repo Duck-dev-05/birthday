@@ -1,0 +1,538 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 50%, #a1c4fd 100%);
+  position: relative;
+  overflow: hidden;
+  padding: 2rem;
+  animation: gradientBG 15s ease infinite;
+  background-size: 400% 400%;
+}
+
+.content {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 3rem;
+  border-radius: 30px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15),
+              0 0 100px rgba(255, 255, 255, 0.3) inset;
+  text-align: center;
+  max-width: 900px;
+  width: 100%;
+  z-index: 1;
+  animation: fadeIn 1s ease-out, float 6s ease-in-out infinite;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.title {
+  font-size: 4rem;
+  background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 2rem;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
+  animation: bounce 2s ease infinite, glow 2s ease-in-out infinite;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.photoGallery {
+  margin: 2.5rem 0;
+  perspective: 1000px;
+}
+
+.photoContainer {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+  background: #fffaf8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photoContainer:hover {
+  transform: translateY(-5px) rotateX(5deg);
+}
+
+.photo {
+  object-fit: contain !important;
+  width: 100% !important;
+  height: 100% !important;
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: brightness(1.05);
+  background: transparent;
+}
+
+.photo:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+.photoControls {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+}
+
+.photoDot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid #ff6b6b;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.photoDot::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ff6b6b;
+  transition: all 0.4s ease;
+}
+
+.photoDot.active {
+  transform: scale(1.2);
+  border-color: #ff4757;
+}
+
+.photoDot.active::before {
+  background: #ff4757;
+  width: 8px;
+  height: 8px;
+}
+
+.musicButton {
+  background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+  color: white;
+  border: none;
+  padding: 1.2rem 2.5rem;
+  border-radius: 50px;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  margin: 1.5rem 0;
+  box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.musicButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.musicButton:hover::before {
+  left: 100%;
+}
+
+.musicButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(255, 107, 107, 0.4);
+}
+
+.musicButton.playing {
+  background: linear-gradient(45deg, #2ecc71, #27ae60);
+  animation: pulse 2s infinite;
+}
+
+.message {
+  margin: 2.5rem auto 0 auto;
+  max-width: 600px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 18px;
+  border: 1.5px solid #ffe0e6;
+  box-shadow: 0 4px 24px rgba(255, 107, 107, 0.08);
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  text-align: center;
+  position: relative;
+  animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.message::before {
+  content: '🎂';
+  position: absolute;
+  top: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2.2rem;
+  filter: drop-shadow(0 2px 6px #ffb6b6);
+}
+
+.message p {
+  margin: 1.1rem 0;
+  font-size: 1.18rem;
+  color: #444;
+  line-height: 1.7;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.message p:first-child {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ff6b6b;
+  margin-bottom: 1.2rem;
+  letter-spacing: 1px;
+  animation-delay: 0.1s;
+}
+
+.message p:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.message p:nth-child(3) {
+  animation-delay: 0.5s;
+}
+
+.message p:nth-child(4) {
+  animation-delay: 0.7s;
+}
+
+.confetti {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    text-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+  }
+  50% {
+    text-shadow: 0 0 30px rgba(255, 107, 107, 0.8);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 15px 30px rgba(46, 204, 113, 0.4);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3);
+  }
+}
+
+/* Enhanced confetti animation */
+.confetti::before,
+.confetti::after {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+  animation: confetti-fall 6s linear infinite;
+  border-radius: 3px;
+}
+
+.confetti::after {
+  background: linear-gradient(45deg, #2ecc71, #27ae60);
+  animation-delay: 3s;
+  width: 12px;
+  height: 12px;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-100vh) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg) scale(0.5);
+    opacity: 0;
+  }
+}
+
+.letterWrapper {
+  margin: 2rem auto;
+  perspective: 1000px;
+  max-width: 500px;
+}
+
+.envelopeButton {
+  background: #f8f9fa;
+  border: none;
+  padding: 1.5rem;
+  border-radius: 12px;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.envelopeButton:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.envelopeButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, #ff6b6b22, #ff8e8e22);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.envelopeButton:hover::before {
+  opacity: 1;
+}
+
+.envelopeIcon {
+  font-size: 3rem;
+  color: #ff6b6b;
+  transition: transform 0.3s ease;
+}
+
+.envelopeButton:hover .envelopeIcon {
+  transform: scale(1.1);
+}
+
+.envelopeButton span {
+  font-size: 1.2rem;
+  color: #444;
+  font-weight: 500;
+}
+
+.letter {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  transform-origin: top center;
+  animation: letterOpen 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  position: relative;
+  background-image: linear-gradient(#f8f9fa 1px, transparent 1px);
+  background-size: 100% 2rem;
+  line-height: 2rem;
+}
+
+.letterContent {
+  position: relative;
+  z-index: 1;
+  animation: fadeInUp 0.5s ease forwards;
+  animation-delay: 0.4s;
+  opacity: 0;
+}
+
+.letterContent p {
+  margin: 1rem 0;
+  font-size: 1.1rem;
+  color: #444;
+  line-height: 1.8;
+  text-align: left;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+.letterContent p:first-child {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #ff6b6b;
+  margin-bottom: 1.5rem;
+}
+
+@keyframes letterOpen {
+  0% {
+    transform: rotateX(-90deg);
+    opacity: 0;
+  }
+  100% {
+    transform: rotateX(0);
+    opacity: 1;
+  }
+}
+
+.envelopeArt {
+  position: relative;
+  width: 80px;
+  height: 60px;
+  margin-bottom: 0.5rem;
+}
+
+.envelopeFlap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80px;
+  height: 40px;
+  background: #ffb6b6;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  z-index: 2;
+  transition: transform 0.6s cubic-bezier(0.4,0,0.2,1);
+  transform-origin: top center;
+}
+
+.envelopeBody {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80px;
+  height: 40px;
+  background: #fff;
+  border: 2px solid #ffb6b6;
+  border-radius: 0 0 10px 10px;
+  z-index: 1;
+}
+
+.envelopeButton.opening .envelopeFlap {
+  transform: rotateX(-120deg);
+}
+
+.letterModalOverlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s;
+}
+
+.letterModalContent {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+  padding: 0;
+  max-width: 540px;
+  width: 90vw;
+  animation: letterOpen 0.7s cubic-bezier(0.4,0,0.2,1);
+  position: relative;
+}
+
+.letterModalClose {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #ff6b6b;
+  cursor: pointer;
+  z-index: 2;
+  transition: color 0.2s;
+}
+
+.letterModalClose:hover {
+  color: #d63031;
+}
+
+.musicPromptButton {
+  background: linear-gradient(90deg, #ffb6b6 0%, #ff6b6b 100%);
+  color: #fff;
+  border: none;
+  padding: 1.2rem 2.5rem;
+  border-radius: 40px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 24px rgba(255, 107, 107, 0.18);
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: pulseMusicBtn 1.5s infinite;
+}
+
+.musicPromptButton:hover {
+  transform: scale(1.07);
+  box-shadow: 0 10px 32px rgba(255, 107, 107, 0.28);
+}
+
+@keyframes pulseMusicBtn {
+  0%, 100% { box-shadow: 0 6px 24px rgba(255, 107, 107, 0.18); }
+  50% { box-shadow: 0 0 40px 10px #ffb6b644; }
+} 
